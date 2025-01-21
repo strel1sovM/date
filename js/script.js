@@ -44,19 +44,59 @@ function showSlise() {
 
 left.addEventListener('click', () => {
 
-    countIndex = (countIndex - 1 + slides.length)% slides.length
+    countIndex = (countIndex - 1 + slides.length) % slides.length
 
     currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     showSlise();
-  
+
 });
 
 right.addEventListener('click', () => {
 
     currentIndex = (currentIndex + 1) % slides.length;
     showSlise();
-    
+
 });
 
 
 showSlise();
+
+
+
+
+
+
+
+
+
+
+function startCountdown(targetDate) {
+    const target = new Date(targetDate);
+
+    const timerId = setInterval(() => {
+        const now = new Date();
+        const timeLeft = target - now; 
+
+        if (timeLeft <= 0) {
+
+            clearInterval(timerId); 
+            return;
+        }
+
+       
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        document.getElementById('days').textContent = days
+        document.getElementById('seconds').textContent = seconds
+        document.getElementById('hours').textContent = hours
+        document.getElementById('minutes').textContent = minutes
+
+
+    }, 1000);
+}
+
+// Использование
+startCountdown("2025-02-02T00:00:00"); // Таймер до 25 января 2025 года
